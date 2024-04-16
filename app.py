@@ -1,6 +1,5 @@
 import streamlit as st
 import plotly.express as px
-import os
 import pandas as pd
 import warnings
 warnings.filterwarnings("ignore")
@@ -15,7 +14,6 @@ if file is not None:
     df = pd.read_csv(filename,encoding = "ISO-8859-1")
     st.write(filename)
 else:
-    os.chdir("C:\\Users\\prave\\OneDrive\\Desktop\\Dashboard")
     filename = "Superstore.csv"
     df = pd.read_csv(filename,encoding = "ISO-8859-1")
     st.write(filename)
