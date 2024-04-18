@@ -14,7 +14,7 @@ if file is not None:
     df = pd.read_csv(filename,encoding = "ISO-8859-1")
     st.write(filename)
 else:
-    filename = "Superstore.csv"
+    filename = "https://github.com/Praveen7805/Dashboard/blob/main/Superstore.csv"
     df = pd.read_csv(filename,encoding = "ISO-8859-1")
     st.write(filename)
 
@@ -139,19 +139,10 @@ data1['layout'].update(title="Relationship between Sales and Profits using Scatt
                        yaxis = dict(title = "Profit", titlefont = dict(size=19)))
 st.plotly_chart(data1,use_container_width=True)
 
-download_count = 0
-with c1:
-  with st.expander("Category_ViewData"):
-    st.write(category_df.style)  # Removed background_gradient
-    csv = category_df.to_csv(index=False).encode('utf-8')
-    download_count += 1  # Increment counter for each button
-    st.download_button("Download Data", data=csv, file_name="Category.csv", mime="text/csv", key=f"download_category_{download_count}")
+with st.expander("View Data"):
+    st.write(filtered_df.iloc[:500,1:20:2].style.background_gradient(cmap="Oranges"))
 
-with c2:
-  with st.expander("Region_ViewData"):
-    region = fdf.groupby(by=["Region"], as_index=False)["Sales"].sum()
-    st.write(region.style)  # Removed background_gradient
-    csv = category_df.to_csv(index=False).encode('utf-8')
-    download_count += 1  # Increment counter for each button
-    st.download_button("Download Data", data=csv, file_name="Region.csv", mime="text/csv", key=f"download_region_{download_count}")
+# Download orginal DataSet
+csv = df.to_csv(index = False).encode('utf-8')
+st.download_button('Download Data', data = csv, file_name = "Data.csv",mime = "text/csv")
 
